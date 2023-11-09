@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
@@ -8,85 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="mega launcher, download mega launcher, eymsems11, eymsems11 software, launcher, safety, free launcher">
     <meta name="generator" content="betacraftuk/homepage">
-    <meta name="description"
-        content="Welcone to Eymsems11 Software Community!">
-    <meta name="author" content="Eymsems11 Team">
+    <meta name="description" content="Eymsems11 Software Topluluğuna Hoş Geldiniz!">
+    <meta name="author" content="Eymsems11 Takımı">
 
-    <title>Home - Eymsems11 Software</title>
+    <title>Ana Sayfa - Eymsems11 Software</title>
     <link rel="icon" href="/assets/favicon.png" type="image/png">
     
     <link rel="stylesheet" href="/assets/style.css">
     <script async src="/assets/safari.js"></script>
+
+    <!-- Dil kontrolü için JavaScript -->
+    <script>
+        // Tarayıcı dilini al
+        var browserLanguage = navigator.language || navigator.userLanguage;
+
+        // Türkçe kontrolü
+        if (browserLanguage.indexOf('tr') === -1) {
+            // Eğer dil Türkçe değilse, URL'ye ?hl=en ekleyerek İngilizce versiyona yönlendir
+            var currentURL = window.location.href;
+            if (currentURL.indexOf('?') === -1) {
+                // Eğer URL'de ? işareti yoksa
+                window.location.href = currentURL + '?hl=en';
+            } else {
+                // Eğer URL'de ? işareti varsa
+                window.location.href = currentURL + '&hl=en';
+            }
+        }
+    </script>
 </head>
 
 <body>
-    <header class="navigation-container" aria-label="Header">
-        <nav aria-label="Navigation and logo" class="navigation">
-            <a class="navigation__home" href="/" title="Homepage" aria-label="Go to homepage">
-                <img class="navigation__logo" alt="Betacraft written in the old Minecraft logo style"
-                    src="/assets/logo.png" height="40" width="248">
-            </a>
-            <div class="navigation__links navigation__links--start" aria-label="Site navigation">
-                <a class="navigation__link navigation__link--white" href="news.htm">News</a>
-                <a class="navigation__link navigation__link--white"
-                    href="">Rules</a>
-                    <a class="navigation__link navigation__link--white"
-                    href="faq.htm">FAQ</a>
-                    <a class="navigation__link navigation__link--white"
-                    href="archive">Archive</a>
-                    <a class="navigation__link navigation__link--white"
-                    href="contact.php">Contact</a>
-                
-            </div>
-            <div class="navigation__links navigation__links--end" aria-label="Account navigation">
-                
-                <a class="navigation__link" href="login.php">Log in</a>
-                <a class="navigation__link" href="register.php">Register</a>
-                <a class="navigation__link" href="https://discord.gg/TkrRs6Mz8h" style="color: blue;">Discord</a>
-                <a class="navigation__link" href="https://youtube.com/@eymsems11_" style="color: red;">YouTube</a>
-            </div>
-        </nav>
-    </header>
-
-    
-    
-
-    
-    <main class="main" aria-label="Main content">
-        <section aria-label="About Betacraft">
-            <video class="trailer-video" src="/assets/trailer.mp4" poster="/assets/trailer.webp" controls>Trailer</video>
-
-            <p>
-                Eymsems11 Software is community and makes windows and MineCraft programs. And hostes MineCraft servers
-                since 2023.
-            </p>
-            <ul>
-                <li>Aternos server 1.20.2</li>
-                <li>Mega Launcher, Skin Change and chat support</li>
-                <li>Mega Launcher free MineCraft launcher</li>
-            </ul>
-            <p>
-                Our server is available 24/7 and its primary language is Turkish. Players can enjoy Survival, SkyBlock and Pvp gameplay types.
-            </p>
-        </section>
-        <aside class="download-now">
-            <picture>
-                <source type="image/webp" srcset="/assets/animals.webp">
-                <source type="image/png" srcset="/assets/animals.png">
-                <img src="/assets/animals.png" width="300" height="202" alt="Left to right: A pig, Steve, and a sheep">
-            </picture>
-            <a href="/download" class="download-now__button button button--orange">Download Now!</a>
-	    <br />
-	    <hr />
-	    <p>Server IP: <a>eymsems11.aternos.me</a> (1.20.2)</p>
-        </aside>
-    </main>
-    
-    <footer class="footer" aria-label="Footer containing legal information">
-        &copy;2023 Eymsems11 Software. &mdash; This website is not affiliated with Mojang.
-        <a class="footer__link" href="/terms-of-use">Terms of Usage</a>
-        | <a class="footer__link" href="/privacy-policy.htm">Privacy Policy</a>
-    </footer>
+    <!-- Sayfa içeriği -->
+    <!-- ... -->
 </body>
 
 </html>
