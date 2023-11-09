@@ -14,8 +14,9 @@
     <link rel="icon" href="/assets/favicon.png" type="image/png">
     
     <link rel="stylesheet" href="/assets/style.css">
+    <script async src="/assets/safari.js"></script>
 
-    <!-- Dil kontrolü için JavaScript -->
+    <!-- Dil kontrolü ve içerik kontrolü için JavaScript -->
     <script>
         // Tarayıcı dilini al
         var browserLanguage = navigator.language || navigator.userLanguage;
@@ -34,6 +35,17 @@
             }
         }
 
+        // İçerik kontrolü
+        function checkContent() {
+            var currentURL = window.location.href;
+
+            if (currentURL.indexOf('?content=sub-server') !== -1) {
+                // Eğer URL'de ?content=sub-server parametresi varsa
+                document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
+                document.getElementById('content-text').innerText = "Bu alt sunucunun özel içeriği burada!";
+            }
+        }
+
         // Türkçe kontrolü
         if (browserLanguage.indexOf('tr') === -1) {
             // Eğer dil Türkçe değilse, dil değişikliği butonunu göster
@@ -41,6 +53,11 @@
                 document.getElementById('language-change').style.display = 'block';
             };
         }
+
+        // İçerik kontrolü çağır
+        window.onload = function () {
+            checkContent();
+        };
     </script>
 </head>
 
@@ -71,9 +88,9 @@
     <main class="main" aria-label="Ana içerik">
         <!-- Sayfa içeriği -->
         <section aria-label="Eymsems11 Hakkında">
-            <video class="trailer-video" src="/assets/trailer.mp4" poster="/assets/trailer.webp" controls>Trailer</video>
+            <video id="trailer-video" class="trailer-video" src="/assets/trailer.mp4" poster="/assets/trailer.webp" controls>Trailer</video>
 
-            <p>
+            <p id="content-text">
                 Eymsems11 Software topluluktur ve Windows ve Minecraft programları yapmaktadır. Ayrıca 2023'ten beri Minecraft sunucuları da barındırmaktadır.
             </p>
             <ul>
