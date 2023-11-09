@@ -36,15 +36,25 @@
 
         // İçerik kontrolü
         function checkContent() {
-            if (currentURL.indexOf('?content=sub-server') !== -1 && currentURL.indexOf('?hl=en') !== -1) {
-                // Eğer URL'de ?content=sub-server ve ?hl=en parametreleri varsa
+            var isTurkey = browserLanguage.indexOf('tr') !== -1;
+            var hasEnParam = currentURL.indexOf('?hl=en') !== -1;
+            var hasSubServerParam = currentURL.indexOf('?content=sub-server') !== -1;
+
+            if (hasEnParam && hasSubServerParam) {
+                // Eğer URL'de ?hl=en ve ?content=sub-server parametreleri varsa
                 document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
                 document.getElementById('content-text').innerText = "This is the special content of the sub-server!";
                 document.getElementById('ip-text').innerText = "78.169.224.57";
                 document.getElementById('version-text').innerText = "(c0.30)";
-            } else if (currentURL.indexOf('?hl=en') !== -1) {
+            } else if (hasEnParam && !hasSubServerParam) {
                 // Eğer sadece ?hl=en parametresi varsa
                 document.getElementById('content-text').innerText = "Eymsems11 Software is a community that develops Windows and Minecraft programs. It has also been hosting Minecraft servers since 2023.";
+            } else if (!hasEnParam && isTurkey && hasSubServerParam) {
+                // Eğer konum Türkiye ise ve ?content=sub-server parametresi varsa
+                document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
+                document.getElementById('content-text').innerText = "Bu alt sunucunun özel içeriği burada!";
+                document.getElementById('ip-text').innerText = "78.169.224.57";
+                document.getElementById('version-text').innerText = "(c0.30)";
             }
         }
 
