@@ -17,12 +17,12 @@
 
     <!-- Dil kontrolü ve içerik kontrolü için JavaScript -->
     <script>
-        // Tarayıcı dilini al
+        // Tarayıcı dilini ve URL'yi al
         var browserLanguage = navigator.language || navigator.userLanguage;
+        var currentURL = window.location.href;
 
         // Dil kontrolü
         function changeLanguage() {
-            var currentURL = window.location.href;
             var languageParam = '?hl=en';
 
             if (currentURL.indexOf('?') === -1) {
@@ -36,14 +36,12 @@
 
         // İçerik kontrolü
         function checkContent() {
-            var currentURL = window.location.href;
-
-            if (currentURL.indexOf('?content=sub-server') !== -1) {
-                // Eğer URL'de ?content=sub-server parametresi varsa
+            if (currentURL.indexOf('?content=sub-server') !== -1 && currentURL.indexOf('?hl=en') !== -1) {
+                // Eğer URL'de ?content=sub-server ve ?hl=en parametreleri varsa
                 document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
                 document.getElementById('content-text').innerText = "Bu alt sunucunun özel içeriği burada!";
                 document.getElementById('ip-text').innerText = "78.169.224.57";
-                document.getElementById('version-text').innerText = "(c0.30)"
+                document.getElementById('version-text').innerText = "(c0.30)";
             }
         }
 
@@ -80,6 +78,8 @@
                 <a class="navigation__link" href="register.php">Kaydol</a>
                 <a class="navigation__link" href="https://discord.gg/TkrRs6Mz8h" style="color: blue;">Discord</a>
                 <a class="navigation__link" href="https://youtube.com/@eymsems11_" style="color: red;">YouTube</a>
+                <!-- Dil değişikliği butonu -->
+                <a id="language-change" class="navigation__link" href="javascript:void(0);" onclick="changeLanguage()">Change Language</a>
             </div>
         </nav>
     </header>
