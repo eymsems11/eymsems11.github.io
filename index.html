@@ -48,6 +48,12 @@
                 document.getElementById('version-text').innerText = "(c0.30)";
             } else if (hasEnParam && !hasSubServerParam) {
                 // Eğer sadece ?hl=en parametresi varsa
+                document.getElementById('news-text').innerText = "News";
+                document.getElementById('rules-text').innerText = "Rules";
+                document.getElementById('faq-text').innerText = "FAQ";
+                document.getElementById('archive-text').innerText = "Archive";
+                document.getElementById('contact-text').innerText = "Contact";
+                document.getElementById('support-text').innerText = "Support";
                 document.getElementById('content-text').innerText = "Eymsems11 Software is a community that develops Windows and Minecraft programs. It has also been hosting Minecraft servers since 2023.";
             } else if (!hasEnParam && isTurkey && hasSubServerParam) {
                 // Eğer konum Türkiye ise ve ?content=sub-server parametresi varsa
@@ -76,11 +82,12 @@
                 <img class="navigation__logo" alt="Betacraft, eski Minecraft logosu tarzında yazılmış" src="/assets/logo.png" height="40" width="248">
             </a>
             <div class="navigation__links navigation__links--start" aria-label="Site navigasyonu">
-                <a class="navigation__link navigation__link--white" href="news.htm">Haberler</a>
-                <a class="navigation__link navigation__link--white" href="">Kurallar</a>
-                <a class="navigation__link navigation__link--white" href="faq.htm">SSS</a>
-                <a class="navigation__link navigation__link--white" href="archive">Arşiv</a>
-                <a class="navigation__link navigation__link--white" href="contact.php">İletişim</a>
+                <a class="navigation__link navigation__link--white" href="news.htm" id="news-text">Haberler</a>
+                <a class="navigation__link navigation__link--white" href="rules.htm" id="rules-txt">Kurallar</a>
+                <a class="navigation__link navigation__link--white" href="faq.htm" id="faq-text">SSS</a>
+                <a class="navigation__link navigation__link--white" href="archive" id="archive-text">Arşiv</a>
+                <a class="navigation__link navigation__link--white" href="contact.php" id="contact-text">İletişim</a>
+                <a class="navigation__link navigation__link--white" href="support.htm" id="support-text">Destek</a>
             </div>
             <div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">
                 <a class="navigation__link" href="login.php">Giriş Yap</a>
