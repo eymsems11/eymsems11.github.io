@@ -21,23 +21,56 @@
         // Tarayıcı dilini al
         var browserLanguage = navigator.language || navigator.userLanguage;
 
-        // Türkçe kontrolü
-        if (browserLanguage.indexOf('tr') === -1) {
-            // Eğer dil Türkçe değilse, URL'ye ?hl=en ekleyerek İngilizce versiyona yönlendir
+        // Dil kontrolü
+        function changeLanguage() {
             var currentURL = window.location.href;
+            var languageParam = '?hl=en';
+
             if (currentURL.indexOf('?') === -1) {
                 // Eğer URL'de ? işareti yoksa
-                window.location.href = currentURL + '?hl=en';
+                window.location.href = currentURL + languageParam;
             } else {
                 // Eğer URL'de ? işareti varsa
                 window.location.href = currentURL + '&hl=en';
             }
         }
+
+        // Türkçe kontrolü
+        if (browserLanguage.indexOf('tr') === -1) {
+            // Eğer dil Türkçe değilse, dil değişikliği butonunu göster
+            window.onload = function () {
+                document.getElementById('language-change').style.display = 'block';
+            };
+        }
     </script>
 </head>
 
 <body>
+    <header class="navigation-container" aria-label="Başlık">
+        <nav aria-label="Navigasyon ve logo" class="navigation">
+            <a class="navigation__home" href="/" title="Ana Sayfa" aria-label="Ana sayfaya git">
+                <img class="navigation__logo" alt="Betacraft, eski Minecraft logosu tarzında yazılmış" src="/assets/logo.png" height="40" width="248">
+            </a>
+            <div class="navigation__links navigation__links--start" aria-label="Site navigasyonu">
+                <a class="navigation__link navigation__link--white" href="news.htm">Haberler</a>
+                <a class="navigation__link navigation__link--white" href="">Kurallar</a>
+                <a class="navigation__link navigation__link--white" href="faq.htm">SSS</a>
+                <a class="navigation__link navigation__link--white" href="archive">Arşiv</a>
+                <a class="navigation__link navigation__link--white" href="contact.php">İletişim</a>
+            </div>
+            <div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">
+                <a class="navigation__link" href="login.php">Giriş Yap</a>
+                <a class="navigation__link" href="register.php">Kaydol</a>
+                <a class="navigation__link" href="https://discord.gg/TkrRs6Mz8h" style="color: blue;">Discord</a>
+                <a class="navigation__link" href="https://youtube.com/@eymsems11_" style="color: red;">YouTube</a>
+                <!-- Dil değişikliği butonu -->
+                <a id="language-change" class="navigation__link" href="javascript:void(0);" onclick="changeLanguage()">Change Language</a>
+            </div>
+        </nav>
+    </header>
+
     <main class="main" aria-label="Ana içerik">
+        <!-- Sayfa içeriği -->
         <section aria-label="Eymsems11 Hakkında">
             <video class="trailer-video" src="/assets/trailer.mp4" poster="/assets/trailer.webp" controls>Trailer</video>
 
@@ -72,6 +105,5 @@
         | <a class="footer__link" href="/privacy-policy.htm">Gizlilik Politikası</a>
     </footer>
 </body>
-
 
 </html>
