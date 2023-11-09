@@ -45,16 +45,12 @@
             }
         }
 
-        // Türkçe kontrolü
-        if (browserLanguage.indexOf('tr') === -1) {
-            // Eğer dil Türkçe değilse, dil değişikliği butonunu göster
-            window.onload = function () {
-                document.getElementById('language-change').style.display = 'block';
-            };
-        }
-
-        // İçerik kontrolü çağır
+        // Türkçe kontrolü ve içerik kontrolü çağır
         window.onload = function () {
+            if (browserLanguage.indexOf('tr') === -1) {
+                // Eğer dil Türkçe değilse, dil değişikliği butonunu göster
+                document.getElementById('language-change').style.display = 'block';
+            }
             checkContent();
         };
     </script>
