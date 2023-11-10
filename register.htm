@@ -113,11 +113,62 @@
             </div>
 
             <label for="remember-me" title="Only for aesthetic purposes :)">
-                Remember me
-                <input type="checkbox" id="remember-me">
+               <h3>We should prove you're human below:</h3><br>
+               <p>Type <a id="random-number"></a> Here:</p>
             </label>
 
             <input class="form__input" type="submit" value="Register and make me Eymsems11 Software Buddy!">
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const registerButton = document.querySelector(".form__input[type='submit']");
+        
+                    registerButton.addEventListener("click", function (e) {
+                        e.preventDefault(); // Form submitini engelle
+        
+                        // Kullanıcı bilgilerini al
+                        const email = document.querySelector("input[name='email']").value;
+                        const password = document.querySelector("input[name='password']").value;
+                        const username = document.querySelector("input[name='username']").value;
+        
+                        // Kullanıcı bilgilerini JSON formatına çevir
+                        const userData = {
+                            email,
+                            password,
+                            username
+                        };
+        
+                        // Veriyi JSON formatına çevir
+                        const userDataJSON = JSON.stringify(userData);
+        
+                        // "buddies" klasörünü ve içine kullanıcı bilgilerinin olduğu bir dosya oluştur
+                        createBuddiesFolderAndFile(userDataJSON);
+                    });
+        
+                    function createBuddiesFolderAndFile(userDataJSON) {
+                        // Sunucu tarafında gerçekleştirilmesi gereken adımları burada yapabilirsiniz.
+                        // Örneğin, sunucuya kullanıcı verilerini POST isteği ile gönderebilir ve sunucu bu verileri işleyebilir.
+        
+                        // Aşağıda sunucu tarafında yapılması gereken adımların sadece bir örneği bulunmaktadır:
+                        // Bu adımlar tarayıcıda doğrudan çalıştırılamaz, sunucu tarafında gerçekleştirilmelidir.
+        
+                        // Örnek sunucu tarafı kodu:
+                        const fs = require('fs');
+                        const path = require('path');
+                        const userData = JSON.parse(request.body); // POST isteği ile alınan veriler
+        
+                        // "buddies" klasörünü oluştur
+                        const buddiesFolderPath = path.join(__dirname, 'buddies');
+                        fs.mkdirSync(buddiesFolderPath);
+        
+                        // Kullanıcı bilgilerini içeren dosyayı oluştur
+                        const userDataFilePath = path.join(buddiesFolderPath, 'user.json');
+                        fs.writeFileSync(userDataFilePath, userDataJSON);
+        
+                        // Sunucu tarafı işlemleri tamamlandığında kullanıcı bilgileri "buddies" klasörüne kaydedilir.
+                    }
+                });
+            </script>
         </form>
     </section>
 </main>
@@ -126,7 +177,7 @@
         Betacraft 2013-2023 &mdash; This website is not affiliated with Mojang.
         <a class="footer__link" href="/legal#terms-of-service">Terms of Service</a>
         | <a class="footer__link" href="/legal#privacy-policy">Privacy Policy</a>
-    </footer>
+    </footer> 
 </body>
 
 </html>
