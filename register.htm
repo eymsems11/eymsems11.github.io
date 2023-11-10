@@ -141,20 +141,23 @@
                         // JavaScript nesnesini JSON formatına çevir
                         const userDataJSON = JSON.stringify(userData);
         
-                        // JSON verisini indirmek yerine bir dosya olarak kaydetmek için Blob oluştur
-                        const blob = new Blob([userDataJSON], { type: "application/json" });
+                        // Kullanıcı adına uygun dosya yolu oluştur
+                        const filePath = `/buddies/${username}.json`;
         
-                        // Blob'u bir URL olarak oluştur
-                        const blobURL = window.URL.createObjectURL(blob);
+                        // JSON verisini sunucuya kaydetmek için bir AJAX veya fetch isteği gönderin
+                        // Örnek AJAX isteği
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", filePath, true);
+                        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        xhr.send(userDataJSON);
         
-                        // Bir bağlantı oluştur ve JSON dosyasını indirmek için kullanıcıya sun
-                        const downloadLink = document.createElement("a");
-                        downloadLink.href = blobURL;
-                        downloadLink.download = $username + ".json";
-                        downloadLink.textContent = "Download User JSON";
-        
-                        // Bağlantıyı otomatik olarak tıklar
-                        downloadLink.click();
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                alert("Kullanıcı bilgileri başarıyla kaydedildi.");
+                            } else {
+                                alert("Kullanıcı bilgileri kaydedilirken bir hata oluştu.");
+                            }
+                        };
                     });
                 });
             </script>
