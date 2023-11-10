@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
@@ -12,46 +12,75 @@
         content="Home of the Betacraft Launcher project, aiming to fix some flaws of the official Minecraft Launcher. You are also welcome to join our nostalgic Minecraft Beta server!">
     <meta name="author" content="Betacraft Team">
 
-    <title>Login - Betacraft</title>
+    <title>Register - Eymsems11 Software</title>
     <link rel="icon" href="/assets/favicon.png" type="image/png">
     
     <link rel="stylesheet" href="/assets/style.css">
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Betacraft",
-            "url": "https://betacraft.uk",
-            "logo": "https://betacraft.uk/assets/pack.png"
+    <script>
+        // Tarayıcı dilini ve URL'yi al
+        var browserLanguage = navigator.language || navigator.userLanguage;
+        var currentURL = window.location.href;
+
+        // Dil kontrolü
+        function changeLanguage() {
+            var languageParam = '?hl=en';
+
+            if (currentURL.indexOf('?') === -1) {
+                // Eğer URL'de ? işareti yoksa
+                window.location.href = currentURL + languageParam;
+            } else {
+                // Eğer URL'de ? işareti varsa
+                window.location.href = currentURL + '&hl=en';
+            }
         }
+
+        // İçerik kontrolü
+        function checkContent() {
+            var isTurkey = browserLanguage.indexOf('tr') !== -1;
+            var hasEnParam = currentURL.indexOf('?hl=en') !== -1;
+        
+            if (hasEnParam && !hasSubServerParam) {
+                // Eğer sadece ?hl=en parametresi varsa
+                document.getElementById('news-text').innerText = "News";
+                document.getElementById('rules-text').innerText = "Rules";
+                document.getElementById('faq-text').innerText = "FAQ";
+                document.getElementById('archive-text').innerText = "Archive";
+                document.getElementById('contact-text').innerText = "Contact";
+                document.getElementById('support-text').innerText = "Support";
+            }
+        }
+
+        // Türkçe kontrolü ve içerik kontrolü çağır
+        window.onload = function () {
+            if (browserLanguage.indexOf('tr') === -1) {
+                // Eğer dil Türkçe değilse, dil değişikliği butonunu göster
+                document.getElementById('language-change').style.display = 'block';
+            }
+            checkContent();
+        };
     </script>
-    <script async src="/assets/safari.js"></script>
 </head>
 
 <body>
-    <header class="navigation-container" aria-label="Header">
-        <nav aria-label="Navigation and logo" class="navigation">
-            <a class="navigation__home" href="/" title="Homepage" aria-label="Go to homepage">
-                <img class="navigation__logo" alt="Betacraft written in the old Minecraft logo style"
-                    src="/assets/logo.png" height="40" width="248">
+    <header class="navigation-container" aria-label="Başlık">
+        <nav aria-label="Navigasyon ve logo" class="navigation">
+            <a class="navigation__home" href="/" title="Ana Sayfa" aria-label="Ana sayfaya git">
+                <img class="navigation__logo" alt="Betacraft, eski Minecraft logosu tarzında yazılmış" src="/assets/logo.png" height="40" width="248">
             </a>
-            <div class="navigation__links navigation__links--start" aria-label="Site navigation">
-                <a class="navigation__link navigation__link--white" href="/downloads">Downloads</a>
-                <a class="navigation__link navigation__link--white"
-                    href="https://www.patreon.com/BetacraftLauncher">Donate</a>
-                <a class="navigation__link navigation__link--white" href="https://discord.gg/d4WvXeQ">Discord</a>
-                
+            <div class="navigation__links navigation__links--start" aria-label="Site navigasyonu">
+                <a class="navigation__link navigation__link--white" href="news.htm" id="news-text">Haberler</a>
+                <a class="navigation__link navigation__link--white" href="rules.htm" id="rules-text">Kurallar</a>
+                <a class="navigation__link navigation__link--white" href="faq.htm" id="faq-text">SSS</a>
+                <a class="navigation__link navigation__link--white" href="archive" id="archive-text">Arşiv</a>
+                <a class="navigation__link navigation__link--white" href="contact.htm" id="contact-text">İletişim</a>
+                <a class="navigation__link navigation__link--white" href="support.htm" id="support-text">Destek</a>
             </div>
-            <div class="navigation__links navigation__links--end" aria-label="Account navigation">
-                
-                <a class="navigation__link" href="/login">Log in</a>
-                
-                
+            <div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">
+                <a class="navigation__link" href="login.htm">Giriş Yap</a>
+                <a class="navigation__link" href="register.htm">Kaydol</a>
             </div>
         </nav>
     </header>
-
-    
-    
 
     
 <main class="main" aria-label="Main content">
@@ -59,7 +88,7 @@
         <h1>Sign in</h1>
         <p>When logging in, use your e-mail address as username.</p>
 
-        <form class="account-form" action="/login" method="post">
+        <form class="account-form" action="/register.htm" method="post">
             <input type="hidden" name="csrf" value="NIECYPB5BPOWLI42MGWRYDT2DBR5JEMKU6KLJMMN3ONNBQGVP6MQ">
 
             <div class="account-form__field">
@@ -70,7 +99,7 @@
             <div class="account-form__field">
                 <label class="form__label" for="password-field">Password</label>
                 <input class="form__input" type="password" name="password" id="password-field">
-                <a class="account-form__link" href="/forgot-password">Forgot password?</a>
+                <a class="account-form__link" href="/login.htm">Already have an account?</a>
             </div>
 
             <label for="remember-me" title="Only for aesthetic purposes :)">
@@ -81,7 +110,6 @@
             <input class="form__input" type="submit" value="Sign in">
         </form>
     </section>
-    <h3>Registration is disabled. Don't ask why, you don't need a Betacraft account to use the launcher.</h3>
 </main>
 
     <footer class="footer" aria-label="Footer containing legal information">
