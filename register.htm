@@ -119,59 +119,7 @@
 
             <input class="form__input" type="submit" value="Register and make me Eymsems11 Software Buddy!">
 
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const registerButton = document.querySelector(".form__input[type='submit']");
-        
-                    registerButton.addEventListener("click", function (e) {
-                        e.preventDefault(); // Form submitini engelle
-        
-                        // Kullanıcı bilgilerini al
-                        const email = document.querySelector("input[name='email']").value;
-                        const password = document.querySelector("input[name='password']").value;
-                        const username = document.querySelector("input[name='username']").value;
-        
-                        // Kullanıcı bilgilerini bir JavaScript nesnesi olarak oluştur
-                        const userData = {
-                            email,
-                            password,
-                            username
-                        };
-        
-                        // JavaScript nesnesini JSON formatına çevir
-                        const userDataJSON = JSON.stringify(userData);
-        
-                        // Mevcut data.json dosyasını almak için bir AJAX veya fetch isteği gönderin
-                        fetch('/buddies/data.json')
-                            .then(response => response.json())
-                            .then(existingData => {
-                                // Mevcut veriye yeni kullanıcı verisini ekleyin
-                                existingData.users.push(userData);
-        
-                                // Yeni veriyi JSON formatına çevirin
-                                const updatedDataJSON = JSON.stringify(existingData);
-        
-                                // /buddies/data.json dosyasına güncellenmiş veriyi gönderin
-                                const xhr = new XMLHttpRequest();
-                                xhr.open("PUT", "/buddies/data.json", true);
-                                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                                xhr.send(updatedDataJSON);
-        
-                                xhr.onload = function () {
-                                    if (xhr.status === 200) {
-                                        alert("Yeni kullanıcı verisi başarıyla eklendi.");
-                                    } else {
-                                        alert("Yeni kullanıcı verisi eklenirken bir hata oluştu.");
-                                    }
-                                };
-                            })
-                            .catch(error => {
-                                console.error('Hata:', error);
-                                alert("Veri alınırken bir hata oluştu.");
-                            });
-                    });
-                });
-            </script>
+            <script src="register.js"></script>
         </form>
     </section>
 </main>
