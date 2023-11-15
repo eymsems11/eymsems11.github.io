@@ -141,23 +141,34 @@
                         // JavaScript nesnesini JSON formatına çevir
                         const userDataJSON = JSON.stringify(userData);
         
-                        // Kullanıcı adına uygun dosya yolu oluştur
-                        const filePath = `/buddies/${username}.json`;
+                        // Mevcut data.json dosyasını almak için bir AJAX veya fetch isteği gönderin
+                        fetch('/buddies/data.json')
+                            .then(response => response.json())
+                            .then(existingData => {
+                                // Mevcut veriye yeni kullanıcı verisini ekleyin
+                                existingData.users.push(userData);
         
-                        // JSON verisini sunucuya kaydetmek için bir AJAX veya fetch isteği gönderin
-                        // Örnek AJAX isteği
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("POST", filePath, true);
-                        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                        xhr.send(userDataJSON);
+                                // Yeni veriyi JSON formatına çevirin
+                                const updatedDataJSON = JSON.stringify(existingData);
         
-                        xhr.onload = function () {
-                            if (xhr.status === 200) {
-                                alert("Kullanıcı bilgileri başarıyla kaydedildi.");
-                            } else {
-                                alert("Kullanıcı bilgileri kaydedilirken bir hata oluştu.");
-                            }
-                        };
+                                // /buddies/data.json dosyasına güncellenmiş veriyi gönderin
+                                const xhr = new XMLHttpRequest();
+                                xhr.open("PUT", "/buddies/data.json", true);
+                                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                                xhr.send(updatedDataJSON);
+        
+                                xhr.onload = function () {
+                                    if (xhr.status === 200) {
+                                        alert("Yeni kullanıcı verisi başarıyla eklendi.");
+                                    } else {
+                                        alert("Yeni kullanıcı verisi eklenirken bir hata oluştu.");
+                                    }
+                                };
+                            })
+                            .catch(error => {
+                                console.error('Hata:', error);
+                                alert("Veri alınırken bir hata oluştu.");
+                            });
                     });
                 });
             </script>
