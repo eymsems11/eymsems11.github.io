@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // data.json dosyasına güncellenmiş veriyi gönderin
                 fetch('buddies/data.json', {
-                    method: 'PUT', // Veya 'POST' olarak değiştirilebilir
+                    method: 'POST', // Veya 'POST' olarak değiştirilebilir
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -36,19 +36,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                     .then(response => {
                         if (response.ok) {
-                            alert("Yeni kullanıcı verisi başarıyla eklendi.");
+                            window.location.href("profile.htm");
                         } else {
-                            alert("Yeni kullanıcı verisi eklenirken bir hata oluştu.");
+                            alert("Error while adding new user data!!!");
                         }
                     })
                     .catch(error => {
                         console.error('Hata:', error);
-                        alert("Veri gönderilirken bir hata oluştu.");
+                        alert("Error while sending data!!!");
                     });
             })
             .catch(error => {
                 console.error('Hata:', error);
-                alert("Veri alınırken bir hata oluştu.");
+                alert("Error white getting data!!!");
             });
     });
 });
