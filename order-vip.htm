@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="mega launcher, download mega launcher, eymsems11, eymsems11 software, launcher, safety, free launcher">
-    <meta name="generator" content="eymsems11io/homepage">
-    <meta name="description" content="Eymsems11 Software Topluluğuna Hoş Geldiniz!">
+    <meta name="generator" content="eymsems11io/order-vip">
+    <meta name="description" content="VIP for Eymse.">
     <meta name="author" content="Eymsems11 Takımı">
     <link rel="stylesheet" href="assets/style.css">
     <title>YENİ! - VIP</title>
@@ -32,7 +32,7 @@
         function checkContent() {
             var isTurkey = browserLanguage.indexOf('tr') !== -1;
             var hasEnParam = currentURL.indexOf('?hl=en') !== -1;
-            var hasOrderparam = currentURL.indexOf('?action=order') !== -1;
+            var hasOrderParam = currentURL.indexOf('?action=order') !== -1;
 
              if (hasEnParam) {
                 // Eğer sadece ?hl=en parametresi varsa
@@ -44,6 +44,10 @@
                 document.getElementById('support-text').innerText = "Support";
                 document.getElementById('ranks-text').innerText = "Ranks";
                 document.getElementById('vip-text').innerText = "Order VIP";
+            }
+
+            else if (hasOrderParam) {
+                
             }
         }
 
