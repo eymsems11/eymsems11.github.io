@@ -8,6 +8,24 @@ document.addEventListener("DOMContentLoaded", function () {
         const email = document.querySelector("input[name='email']").value;
         const password = document.querySelector("input[name='password']").value;
         const username = document.querySelector("input[name='username']").value;
+        const bdate = document.querySelector.apply("input[name=")
+
+        // Doğum tarihi alanını al
+            const birthdate = document.querySelector("input[name='birthdate']").value;
+
+            // Eğer doğum tarihi alanı doluysa ve en az 12 yıl önce bir tarih seçildiyse devam et
+            if (birthdate) {
+                const minBirthdate = new Date();
+                minBirthdate.setFullYear(minBirthdate.getFullYear() - 12);
+
+                const selectedDate = new Date(birthdate);
+
+                if (selectedDate < minBirthdate) {
+                    // Form gönderme işlemleri
+                } else {
+                    alert("Please select a date at least 12 years ago for your birthdate!");
+                }
+            }
 
         // Kullanıcı bilgilerini XML formatına dönüştürme
         const userDataXML = `
@@ -15,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <email>${email}</email>
                 <password>${password}</password>
                 <username>${username}</username>
+                <bdate>${bdate}</bdate>
             </user>
         `;
 
