@@ -16,39 +16,38 @@ document.addEventListener("DOMContentLoaded", function () {
             username
         };
 
-        // Mevcut data.json dosyasına veri eklemek için bir AJAX veya fetch isteği gönderin
-        fetch('buddies/data.json')
-            .then(response => response.json())
-            .then(existingData => {
-                // Mevcut veriye yeni kullanıcı verisini ekleyin
-                existingData.users.push(userData);
+        // Kullanıcı bilgilerini JSON'dan XML'e dönüştürme fonksiyonu
+        function convertJSONtoXML(userData) {
+            let xmlString = '<user>';
 
-                // Yeni veriyi JSON formatına çevirin
-                const updatedDataJSON = JSON.stringify(existingData);
+            for (const [key, value] of Object.entries(userData)) {
+                xmlString += `<${key}>${value}</${key}>`;
+            }
 
-                // data.json dosyasına güncellenmiş veriyi gönderin
-                fetch('buddies/data.json', {
-                    method: 'POST', // Veya 'POST' olarak değiştirilebilir
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: updatedDataJSON
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            window.location.href("profile.htm");
-                        } else {
-                            alert("Error while adding new user data!!!");
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Hata:', error);
-                        alert("Error while sending data!!!");
-                    });
-            })
-            .catch(error => {
-                console.error('Hata:', error);
-                alert("Error white getting data!!!");
-            });
+            xmlString += '</user>';
+            return xmlString;
+        }
+
+        // Dönüştürülmüş XML verisini gönderme
+        const userDataXML = convertJSONtoXML(userData);
+
+        fetch('buddies/data.xml', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/xml'
+            },
+            body: userDataXML
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "profile.htm";
+            } else {
+                alert("Error while adding new user data!!!");
+            }
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+            alert("Error while sending data!!!");
+        });
     });
 });
