@@ -9,28 +9,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const password = document.querySelector("input[name='password']").value;
         const username = document.querySelector("input[name='username']").value;
 
-        // Kullanıcı bilgilerini bir JavaScript nesnesi olarak oluştur
-        const userData = {
-            email,
-            password,
-            username
-        };
+        // Kullanıcı bilgilerini XML formatına dönüştürme
+        const userDataXML = `
+            <user>
+                <email>${email}</email>
+                <password>${password}</password>
+                <username>${username}</username>
+            </user>
+        `;
 
-        // Kullanıcı bilgilerini JSON'dan XML'e dönüştürme fonksiyonu
-        function convertJSONtoXML(userData) {
-            let xmlString = '<user>';
-
-            for (const [key, value] of Object.entries(userData)) {
-                xmlString += `<${key}>${value}</${key}>`;
-            }
-
-            xmlString += '</user>';
-            return xmlString;
-        }
-
-        // Dönüştürülmüş XML verisini gönderme
-        const userDataXML = convertJSONtoXML(userData);
-
+        // data.xml dosyasına XML verisini gönderme
         fetch('buddies/data.xml', {
             method: 'POST',
             headers: {
