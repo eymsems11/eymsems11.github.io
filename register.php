@@ -75,52 +75,93 @@
                 <a class="navigation__link navigation__link--white" href="contact.htm" id="contact-text">İletişim</a>
                 <a class="navigation__link navigation__link--white" href="support.htm" id="support-text">Destek</a>
             </div>
-            <div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">
-                <a class="navigation__link" href="login.htm">Giriş Yap</a>
-                <a class="navigation__link" href="register.htm">Kaydol</a>
-            </div>
+            <?php
+session_start();
+
+// Eğer giriş yapılmışsa ve kullanıcı adı saklanmışsa, kullanıcı adını ve çıkış yapma bağlantısını göster
+if(isset($_SESSION['username']) && isset($_COOKIE['unique_computer_id'])) {
+    $username = $_SESSION['username'];
+    echo '<div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">';
+    echo '<p>' . $username . ' Olarak Giriş Yapıldı <a class="navigation__link" href="logout.php">Çıkış Yap</a></p>';
+    echo '</div>';
+} else {
+    echo '<div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">';
+    echo '<a class="navigation__link" href="login.htm">Giriş Yap</a>';
+    echo '<a class="navigation__link" href="register.htm">Kaydol</a>';
+    echo '</div>';
+}
+?>
+
         </nav>
     </header>
 
     
 <main class="main" aria-label="Main content">
-    <section aria-label="Login">
-        <img src="assets/software-logo.png"><h1>Online registration</h1>
-        <section>
-        <h2>What if i'll register?</h2>   
-        <p>When you register, you'll get officially member of Eymsems11 Software!</p><br>
-        <p>You can interact buddies with our forums, change skin and manage account</p><br>
-        <p>on Mega Launcher&trade;, and you can get updates immediatly with e-mail!</p>
-        </section>
-
-        <form class="account-form" action="/register.htm" method="post">
-            <input type="hidden" name="csrf" value="NIECYPB5BPOWLI42MGWRYDT2DBR5JEMKU6KLJMMN3ONNBQGVP6MQ">
-
+    <section>
+        <h1>Kayıt Formu</h1>
+        <form class="account-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <!-- Form alanları -->
             <div class="account-form__field">
-                <label class="acocunt-form__label" for="username-field">Your E-Mail:</label>
-                <input class="form__input" type="email" name="email" placeholder="me@example.com" id="username-field" required> 
+                <label for="email-field">E-posta Adresiniz:</label>
+                <input type="email" name="email" id="email-field" required>
             </div>
 
             <div class="account-form__field">
-                <label class="form__label" for="password-field">Password:</label>
-                <input class="form__input" type="password" name="password" id="password-field" required>
+                <label for="password-field">Şifre:</label>
+                <input type="password" name="password" id="password-field" required>
             </div>
 
             <div class="account-form__field">
-                <label class="form__label" for="username-field">MineCraft Username:</label>
-                <input class="form__input" type="username" name="username" id="username-field" required>
-                <a class="account-form__link" href="/login.htm">Already have an account?</a>
+                <label for="username-field">Minecraft Kullanıcı Adınız:</label>
+                <input type="text" name="username" id="username-field" required>
             </div>
 
             <div class="account-form__field">
-                <label class="form__label" for="birthdate-field">Birthdate (at least 12 years old):</label>
-                <input class="form__input" type="date" name="birthdate" id="birthdate-field" max="2011-11-18" required>
+                <label for="birthdate-field">Doğum Tarihi (en az 12 yaşında olmalısınız):</label>
+                <input type="date" name="birthdate" id="birthdate-field" max="2011-11-18" required>
             </div>
 
-            <input class="form__input" type="submit" value="Register and make me Eymsems11 Software Buddy!">
-
-            <script src="register.js"></script>
+            <input type="submit" value="Kayıt Ol">
         </form>
+
+        <?php
+// Formdan gelen verileri işleme
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $username = $_POST["username"];
+    $birthdate = $_POST["birthdate"];
+    $registration_ip = $_SERVER['REMOTE_ADDR']; // Kayıt olduğu bilgisayarın IP adresi
+
+    // Veritabanı bağlantı bilgileri
+    $servername = "localhost";
+    $db_username = "root"; // Varsayılan olarak XAMPP'te kullanıcı adı "root" olabilir
+    $db_password = ""; // Varsayılan olarak XAMPP'te şifre yoktur
+    $dbname = "buddies"; // Kullandığınız veritabanının adı
+
+    // Bağlantı oluşturma
+    $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+    // Bağlantı kontrolü
+    if ($conn->connect_error) {
+        die("Veritabanı bağlantısı başarısız: " . $conn->connect_error);
+    }
+
+    // SQL sorgusu oluşturma
+    $sql = "INSERT INTO users (email, password, minecraft_username, birthdate, registration_ip)
+            VALUES ('$email', '$password', '$username', '$birthdate', '$registration_ip')";
+
+    // Sorguyu çalıştırma ve kontrol etme
+    if ($conn->query($sql) === TRUE) {
+        echo "Kullanıcı başarıyla kaydedildi!";
+    } else {
+        echo "Hata oluştu: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Bağlantıyı kapatma
+    $conn->close();
+}
+?>
     </section>
 </main>
 

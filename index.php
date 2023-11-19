@@ -61,7 +61,7 @@
                 // Eğer konum Türkiye ise ve ?content=sub-server parametresi varsa
                 document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
                 document.getElementById('content-text').innerText = "Bu alt sunucunun özel içeriği burada!";
-                document.getElementById('ip-text').innerText = "78.169.224.57";
+                document.getElementById('ip-text').innerText = "";
                 document.getElementById('version-text').innerText = "(c0.30)";
             }
         }
@@ -94,10 +94,23 @@
                 <a class="navigation__link navigation__link--white" href="support.htm" id="support-text">Destek</a>
 
             </div>
-            <div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">
-                <a class="navigation__link" href="login.htm">Giriş Yap</a>
-                <a class="navigation__link" href="register.htm">Kaydol</a>
-            </div>
+            <?php
+            session_start();
+
+// Eğer giriş yapılmışsa ve kullanıcı adı saklanmışsa, kullanıcı adını ve çıkış yapma bağlantısını göster
+if(isset($_SESSION['username']) && isset($_COOKIE['unique_computer_id'])) {
+    $username = $_SESSION['username'];
+    echo '<div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">';
+    echo '<p>' . $username . ' Olarak Giriş Yapıldı <a class="navigation__link" href="logout.php">Çıkış Yap</a></p>';
+    echo '</div>';
+} else {
+    echo '<div class="navigation__links navigation__links--end" aria-label="Hesap navigasyonu">';
+    echo '<a class="navigation__link" href="login.php">Giriş Yap</a>';
+    echo '<a class="navigation__link" href="register.php">Kaydol</a>';
+    echo '</div>';
+}
+?>
+
         </nav>
     </header>
 
