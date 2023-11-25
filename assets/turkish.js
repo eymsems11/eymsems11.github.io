@@ -1,4 +1,7 @@
-  document.addEventListener('DOMContentLoaded', function() {
-    var backgroundAudio = document.getElementById('backgroundAudio');
-    backgroundAudio.play();
-  });
+var backgroundAudio = document.getElementById('backgroundAudio');
+
+backgroundAudio.addEventListener('error', function() {
+  console.error('Ses dosyası yüklenirken bir hata oluştu.');
+});
+
+backgroundAudio.play();
