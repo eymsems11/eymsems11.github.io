@@ -14,70 +14,6 @@
     <link rel="icon" href="/assets/favicon.png" type="image/png">
     
     <link rel="stylesheet" href="/assets/style.css">
-
-    <!-- Dil kontrolü ve içerik kontrolü için JavaScript -->
-    <script>
-        // Tarayıcı dilini ve URL'yi al
-        var browserLanguage = navigator.language || navigator.userLanguage;
-        var currentURL = window.location.href;
-
-        // Dil kontrolü
-        function changeLanguage() {
-            var languageParam = '?hl=en';
-
-            if (currentURL.indexOf('?') === -1) {
-                // Eğer URL'de ? işareti yoksa
-                window.location.href = currentURL + languageParam;
-            } else {
-                // Eğer URL'de ? işareti varsa
-                window.location.href = currentURL + '&hl=en';
-            }
-        }
-
-        // İçerik kontrolü
-        function checkContent() {
-            var isTurkey = browserLanguage.indexOf('tr') !== -1;
-            var hasEnParam = currentURL.indexOf('?hl=en') !== -1;
-            var hasSubServerParam = currentURL.indexOf('?content=sub-server') !== -1;
-
-            if (hasEnParam && hasSubServerParam) {
-                // Eğer URL'de ?hl=en ve ?content=sub-server parametreleri varsa
-                document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
-                document.getElementById('content-text').innerText = "This is the special content of the sub-server!";
-                document.getElementById('ip-text').innerText = "78.169.224.57";
-                document.getElementById('version-text').innerText = "(c0.30)";
-            } else if (hasEnParam && !hasSubServerParam) {
-                // Eğer sadece ?hl=en parametresi varsa
-                document.getElementById('news-text').innerText = "News";
-                document.getElementById('rules-text').innerText = "Rules";
-                document.getElementById('faq-text').innerText = "FAQ";
-                document.getElementById('archive-text').innerText = "Archive";
-                document.getElementById('contact-text').innerText = "Contact";
-                document.getElementById('support-text').innerText = "Support";
-                document.getElementById('ranks-text').innerText = "Ranks";
-                document.getElementById('vip-text').innerText = "Order VIP";
-                document.getElementById('about-text').innerText = "About Us";
-                document.getElementById('content-text').innerText = "Eymsems11 Software is a community that develops Windows and Minecraft programs. It has also been hosting Minecraft servers since 2023.";
-                document.getElementById('download-text').innerText = "Download Now!"
-                document.getElementById('lang-text').innerText = "Türk Website";
-            } else if (!hasEnParam && isTurkey && hasSubServerParam) {
-                // Eğer konum Türkiye ise ve ?content=sub-server parametresi varsa
-                document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
-                document.getElementById('content-text').innerText = "Bu alt sunucunun özel içeriği burada!";
-                document.getElementById('ip-text').innerText = "";
-                document.getElementById('version-text').innerText = "(c0.30)";
-            }
-        }
-
-        // Türkçe kontrolü ve içerik kontrolü çağır
-        window.onload = function () {
-            if (browserLanguage.indexOf('tr') === -1) {
-                // Eğer dil Türkçe değilse, dil değişikliği butonunu göster
-                document.getElementById('language-change').style.display = 'block';
-            }
-            checkContent();
-        };
-    </script>
 </head>
 
 <body>
@@ -104,7 +40,7 @@
         <section aria-label="Eymsems11 Hakkında">
             <video id="trailer-video" class="trailer-video" src="/assets/trailer.mp4" poster="/assets/trailer.webp" controls>Trailer</video>
 
-            <p id="content-text">
+            <p>
                 Eymsems11 Software topluluktur ve Windows ve Minecraft programları yapmaktadır. Ayrıca 2023'ten beri Minecraft sunucuları da barındırmaktadır.
             </p>
             <ul>
@@ -125,10 +61,10 @@
                 <source type="image/png" srcset="/assets/animals.png">
                 <img src="/assets/animals.png" width="300" height="202" alt="Soldan sağa: Bir domuz, Steve ve bir koyun">
             </picture>
-            <a href="/download" class="download-now__button button button--orange" id="download-text">Şimdi İndir!</a>
+            <a href="/download" class="download-now__button button button--orange">Şimdi İndir!</a>
             <br />
             <hr />
-            <p>Sunucu IP: <a id="ip-text">eymsems11.aternos.me</a> <a id="version-text">(1.20.2)</a></p>
+            <p>Sunucu IP: <a>eymsems11.aternos.me</a> (1.20.2)</p>
         </aside>
     </main>
 
