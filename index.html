@@ -11,7 +11,6 @@
     <meta name="author" content="Eymsems11 Takımı">
 
     <title>Ana Sayfa - Eymsems11 Software</title>
-    <link rel="icon" href="/assets/favicon.png">
     <link rel="icon" href="/assets/favicon.png" type="image/png">
     
     <link rel="stylesheet" href="/assets/style.css">
@@ -57,7 +56,9 @@
                 document.getElementById('support-text').innerText = "Support";
                 document.getElementById('ranks-text').innerText = "Ranks";
                 document.getElementById('vip-text').innerText = "Order VIP";
+                document.getElementById('about-text').innerText = "About Us";
                 document.getElementById('content-text').innerText = "Eymsems11 Software is a community that develops Windows and Minecraft programs. It has also been hosting Minecraft servers since 2023.";
+                document.getElementById('download-text').innerText = "Download Now!"
             } else if (!hasEnParam && isTurkey && hasSubServerParam) {
                 // Eğer konum Türkiye ise ve ?content=sub-server parametresi varsa
                 document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
@@ -86,16 +87,13 @@
             </a>
             <div class="navigation__links navigation__links--start" aria-label="Site navigasyonu">
                 <a class="navigation__link navigation__link--white" href="news.htm" id="news-text">Haberler</a>
-                <a class="navigation__link navigation__link--white" href="rules.htm" id="rules-text">Kurallar</a>
-                <a class="navigation__link navigation__link--white" href="ranks.htm" id="ranks-text">Ranklar</a>
                     <a class="navigation__link navigation__link--white" href="order-vip.htm" id="vip-text">VIP Al</a>
                 <a class="navigation__link navigation__link--white" href="faq.htm" id="faq-text">SSS</a>
                 <a class="navigation__link navigation__link--white" href="archive" id="archive-text">Arşiv</a>
                 <a class="navigation__link navigation__link--white" href="contact.htm" id="contact-text">İletişim</a>
                 <a class="navigation__link navigation__link--white" href="support.htm" id="support-text">Destek</a>
-
+                <a class="navigation__link navigation__link--white" href="about.htm" id="about-text">Hakkımızda</a>
             </div>
-
         </nav>
     </header>
 
@@ -125,7 +123,7 @@
                 <source type="image/png" srcset="/assets/animals.png">
                 <img src="/assets/animals.png" width="300" height="202" alt="Soldan sağa: Bir domuz, Steve ve bir koyun">
             </picture>
-            <a href="/download" class="download-now__button button button--orange">Şimdi İndir!</a>
+            <a href="/download" class="download-now__button button button--orange" id="download-text">Şimdi İndir!</a>
             <br />
             <hr />
             <p>Sunucu IP: <a id="ip-text">eymsems11.aternos.me</a> <a id="version-text">(1.20.2)</a></p>
