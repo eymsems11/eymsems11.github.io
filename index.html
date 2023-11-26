@@ -59,6 +59,7 @@
                 document.getElementById('about-text').innerText = "About Us";
                 document.getElementById('content-text').innerText = "Eymsems11 Software is a community that develops Windows and Minecraft programs. It has also been hosting Minecraft servers since 2023.";
                 document.getElementById('download-text').innerText = "Download Now!"
+                document.getElementById('lang-text').innerText = "Türk Website";
             } else if (!hasEnParam && isTurkey && hasSubServerParam) {
                 // Eğer konum Türkiye ise ve ?content=sub-server parametresi varsa
                 document.getElementById('trailer-video').src = "/assets/sub-server-trailer.mp4";
@@ -93,6 +94,7 @@
                 <a class="navigation__link navigation__link--white" href="contact.htm" id="contact-text">İletişim</a>
                 <a class="navigation__link navigation__link--white" href="support.htm" id="support-text">Destek</a>
                 <a class="navigation__link navigation__link--white" href="about.htm" id="about-text">Hakkımızda</a>
+                <a class="navigation__link navigation__link--white" href="/?hl=en" id="lang-text">English Website</a>
             </div>
         </nav>
     </header>
